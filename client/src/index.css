@@ -1,0 +1,10 @@
+html,
+body,
+#root {
+  font-family: "Monospace Number", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  height: 100%;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
