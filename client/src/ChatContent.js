@@ -1,7 +1,11 @@
 import React from 'react'
 
 
-export default () =>
+export default ({messages}) =>
   <div>
-    <div>ChatContent</div>
+    {messages.map((msg, index) =>
+      <div key={index}>
+        <b>{msg.sender}:</b> {msg.text}
+      </div>
+    )}
   </div>
