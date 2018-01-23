@@ -13,11 +13,11 @@ const Input = styled.input`
   }
 `;
 
-export default () =>
-  <form onSubmit={event => { event.preventDefault(); return false} }>
+export default ({newMessageText, onChangeNewMessage, onSendNewMessage}) =>
+  <form onSubmit={event => { onSendNewMessage(); event.preventDefault(); return false} }>
     <Input
-      onChange={event => console.log(event.target.value)}
+      onChange={event => onChangeNewMessage(event.target.value)}
       placeholder="Type new message and hit enter"
-      value=""
+      value={newMessageText}
     />
   </form>

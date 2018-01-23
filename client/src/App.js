@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import ChannelList from './ChannelList'
-import MessageInput from './MessageInput'
-import ChatContent from './ChatContent'
+import ChannelListContainer from './ChannelListContainer'
+import MessageInputContainer from './MessageInputContainer'
+import ChatContentContainer from './ChatContentContainer'
 
 
 const MainLayout = styled.div`
@@ -40,15 +40,15 @@ export default () =>
   <MainLayout>
 
     <Sidebar>
-      <ChannelList />
+      <ChannelListContainer />
     </Sidebar>
 
     <ContentLayout>
       <Content>
-        <ChatContent />
+        <ChatContentContainer />
       </Content>
       <Footer>
-        <MessageInput />
+        <MessageInputContainer />
       </Footer>
     </ContentLayout>
 
