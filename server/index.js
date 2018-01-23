@@ -13,6 +13,9 @@ wss.on('connection', function(ws) {
   ws.on('message', function(data) {
     broadcast(data)
   })
+  ws.on('error', function(data) {
+    console.log(data)
+  })
 })
 
 console.log('Running Websocket server on port 8080')

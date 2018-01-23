@@ -8,6 +8,9 @@ import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 import reducer from './reducer.js'
 import App from './App'
+import { connectToServer } from './actions'
+
+
 
 
 const loggerMiddleware = createLogger()
@@ -27,3 +30,10 @@ const Root = () => (
 
 ReactDOM.render(<Root />, document.getElementById('root'))
 registerServiceWorker()
+
+
+
+store.dispatch(connectToServer())
+
+
+
