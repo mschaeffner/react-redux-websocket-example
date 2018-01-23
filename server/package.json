@@ -1,0 +1,13 @@
+{
+  "name": "react-redux-websocket-example-server",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^4.0.0"
+  }
+}
