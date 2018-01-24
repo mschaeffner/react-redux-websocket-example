@@ -14,4 +14,4 @@ cd client
 npm install
 npm start
 ```
-Client can be access on http://localhost:3000.
+Client UI can be seen on http://localhost:3000.
