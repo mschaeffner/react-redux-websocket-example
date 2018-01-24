@@ -1,0 +1,252 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should render the app with 3 users logged in and some private messages 1`] = `
+<div
+  className="sc-ifAKCX lnvtse"
+>
+  <div
+    className="sc-bZQynM bJffvh"
+  >
+    <div
+      className="sc-htpNat gdoqOL"
+    >
+      <div
+        className=""
+        onClick={[Function]}
+      >
+        ALL
+        
+      </div>
+      <div
+        className=""
+        onClick={[Function]}
+      >
+        mathias
+         (you)
+      </div>
+      <div
+        className="highlight"
+        onClick={[Function]}
+      >
+        alice
+        
+      </div>
+      <div
+        className=""
+        onClick={[Function]}
+      >
+        bob
+        
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-EHOje lcMTcm"
+  >
+    <div
+      className="sc-gzVnrw iiLelF"
+    >
+      <div>
+        <div>
+          <b>
+            mathias
+            :
+          </b>
+           
+          a private message to alice
+        </div>
+        <div>
+          <b>
+            alice
+            :
+          </b>
+           
+          a private message from alice back to mathias
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-htoDjs ihRtnX"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          className="sc-bxivhb ktBgBC"
+          onChange={[Function]}
+          placeholder="Type new message and hit enter"
+          value="starting of a new message"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App should render the app with 3 users logged in and some public messages 1`] = `
+<div
+  className="sc-ifAKCX lnvtse"
+>
+  <div
+    className="sc-bZQynM bJffvh"
+  >
+    <div
+      className="sc-htpNat gdoqOL"
+    >
+      <div
+        className="highlight"
+        onClick={[Function]}
+      >
+        ALL
+        
+      </div>
+      <div
+        className=""
+        onClick={[Function]}
+      >
+        mathias
+         (you)
+      </div>
+      <div
+        className=""
+        onClick={[Function]}
+      >
+        alice
+        
+      </div>
+      <div
+        className=""
+        onClick={[Function]}
+      >
+        bob
+        
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-EHOje lcMTcm"
+  >
+    <div
+      className="sc-gzVnrw iiLelF"
+    >
+      <div>
+        <div>
+          <b>
+            mathias
+            :
+          </b>
+           
+          the first message
+        </div>
+        <div>
+          <b>
+            mathias
+            :
+          </b>
+           
+          the second message
+        </div>
+        <div>
+          <b>
+            alice
+            :
+          </b>
+           
+          a message from alice
+        </div>
+        <div>
+          <b>
+            bob
+            :
+          </b>
+           
+          a message from bob
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-htoDjs ihRtnX"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          className="sc-bxivhb ktBgBC"
+          onChange={[Function]}
+          placeholder="Type new message and hit enter"
+          value="starting of a new message"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App should render the app with only me logged in 1`] = `
+<div
+  className="sc-ifAKCX lnvtse"
+>
+  <div
+    className="sc-bZQynM bJffvh"
+  >
+    <div
+      className="sc-htpNat gdoqOL"
+    >
+      <div
+        className="highlight"
+        onClick={[Function]}
+      >
+        ALL
+        
+      </div>
+      <div
+        className=""
+        onClick={[Function]}
+      >
+        mathias
+         (you)
+      </div>
+    </div>
+  </div>
+  <div
+    className="sc-EHOje lcMTcm"
+  >
+    <div
+      className="sc-gzVnrw iiLelF"
+    >
+      <div />
+    </div>
+    <div
+      className="sc-htoDjs ihRtnX"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          className="sc-bxivhb ktBgBC"
+          onChange={[Function]}
+          placeholder="Type new message and hit enter"
+          value=""
+        />
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App should render the login screen 1`] = `
+<div
+  className="sc-bwzfXH jcRXCr"
+>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      className="sc-bdVaJa faSDVW"
+      onChange={[Function]}
+      placeholder="Choose a username and hit enter"
+      value={undefined}
+    />
+  </form>
+</div>
+`;
