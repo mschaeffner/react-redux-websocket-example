@@ -58,6 +58,11 @@ export const receiveMessage = (message) => dispatch => {
 
 export const connectToServer = () => (dispatch, getState) => {
   const state = getState()
+  if(state.me.username === "") {
+    // show error message in UI
+    return
+  }
+  
   const connection = new WebSocket(SERVER_URL)
 
   connection.onopen = () => {
