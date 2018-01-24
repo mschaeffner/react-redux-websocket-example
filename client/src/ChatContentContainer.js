@@ -9,10 +9,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    receiveMessage: () => dispatch(receiveMessage("the sender", "the text")),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatContent)
+export default connect(mapStateToProps)(ChatContent)

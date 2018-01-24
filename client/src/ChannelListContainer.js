@@ -4,6 +4,7 @@ import ChannelList from './ChannelList'
 
 const mapStateToProps = state => {
   return {
+    users: state.activeUsers
   }
 }
 

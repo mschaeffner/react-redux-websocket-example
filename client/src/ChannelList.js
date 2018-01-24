@@ -1,7 +1,11 @@
 import React from 'react'
 
 
-export default () =>
+export default ({users}) =>
   <div>
-    Sidebar
+    {users.map((user, index) =>
+      <div key={index}>
+        {user.username}
+      </div>
+    )}
   </div>
