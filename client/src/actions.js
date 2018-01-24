@@ -1,14 +1,12 @@
-import uuid from 'uuid/v4'
-
 export const NEW_MESSAGE_CHANGED = 'NEW_MESSAGE_CHANGED'
 export const MESSAGE_SENT = 'MESSAGE_SENT'
 export const USERNAME_CHANGED = 'USERNAME_CHANGED'
 export const CONNECTED_TO_SERVER = 'CONNECTED_TO_SERVER'
+export const CHANNEL_SELECTED = 'CHANNEL_SELECTED'
 
 export const USER_JOINED = 'USER_JOINED'
 export const USER_LEFT = 'USER_LEFT'
-export const PUBLIC_MESSAGE = 'PUBLIC_MESSAGE'
-export const PRIVATE_MESSAGE = 'PRIVATE_MESSAGE'
+export const CHAT_MESSAGE = 'CHAT_MESSAGE'
 export const ACTIVE_USERS = 'ACTIVE_USERS'
 
 
@@ -16,6 +14,12 @@ const SERVER_URL = 'ws://localhost:8080'
 
 
 
+export const selectChannel = (channelId) => dispatch => {
+  dispatch({
+    type: CHANNEL_SELECTED,
+    payload: channelId
+  })
+}
 
 export const changeNewMessage = (text) => dispatch => {
   dispatch({
@@ -34,10 +38,11 @@ export const changeUsername = (username) => dispatch => {
 export const sendNewMessage = () => (dispatch, getState) => {
   const state = getState()
   const newMessage = {
-    type: PUBLIC_MESSAGE,
+    type: CHAT_MESSAGE,
     payload: {
-      sender: state.username,
-      text: state.newMessageText
+      sender: state.me,
+      text: state.newMessageText,
+      receiver: state.selectedChannel
     }
   }
   state.connectionToServer.send(JSON.stringify(newMessage))
@@ -65,10 +70,7 @@ export const connectToServer = () => (dispatch, getState) => {
 
     const newMessage = {
       type: USER_JOINED,
-      payload: {
-        username: state.username,
-        id: uuid()
-      }
+      payload: state.me
     }
     connection.send(JSON.stringify(newMessage))
   }

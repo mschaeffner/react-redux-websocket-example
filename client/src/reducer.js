@@ -1,3 +1,5 @@
+import uuid from 'uuid/v4'
+
 import {
   NEW_MESSAGE_CHANGED,
   MESSAGE_SENT,
@@ -5,18 +7,22 @@ import {
   CONNECTED_TO_SERVER,
   USER_LEFT,
   USER_JOINED,
-  PUBLIC_MESSAGE,
-  PRIVATE_MESSAGE,
-  ACTIVE_USERS
+  CHAT_MESSAGE,
+  ACTIVE_USERS,
+  CHANNEL_SELECTED
 } from './actions'
 
 
 const INITIAL_STATE = {
-  username: '',
+  me: {
+    username: '',
+    id: uuid()
+  },
   newMessageText: '',
   messages: [],
   connectionToServer: null,
-  activeUsers: []
+  activeUsers: [],
+  selectedChannel: 'ALL'
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -29,16 +35,16 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, newMessageText: ''}
 
     case ACTIVE_USERS:
+      const activeUsers = action.payload.users.map(u => {
+        u.messages = []
+        return u
+      })
       return { ...state, activeUsers: action.payload.users }
 
     case USER_JOINED:
       const activeUsers1 = [ ...state.activeUsers ]
-      
-      console.log(activeUsers1.filter(u => u.id === action.payload.id))
-      console.log(!activeUsers1.filter(u => u.id === action.payload.id))
-      
       if(!activeUsers1.filter(u => u.id === action.payload.id).length) {
-        activeUsers1.push(action.payload)
+        activeUsers1.push({ ...action.payload, messages: [] })
       }
       return { ...state, activeUsers: activeUsers1 }
 
@@ -48,16 +54,27 @@ export default (state = INITIAL_STATE, action) => {
       })
       return { ...state, activeUsers: activeUsers2 }
 
-    case PUBLIC_MESSAGE:
+    case CHAT_MESSAGE:
       const newMessage = action.payload
-      const messages = [ ...state.messages, newMessage]
-      return { ...state, messages }
+      
+      if(newMessage.receiver === 'ALL') {
+        const messages1 = [ ...state.messages, newMessage ]
+        return { ...state, messages: messages1 }
+      } else {
+        const activeUsers3 = state.activeUsers
+        activeUsers3.find(u => u.id === newMessage.sender.id).messages.push(newMessage)
+        return { ...state, activeUsers: activeUsers3 }
+      }
 
     case USERNAME_CHANGED:
-      return { ...state, username: action.payload }
+      const me = { ...state.me, username: action.payload } 
+      return { ...state, me }
 
     case CONNECTED_TO_SERVER:
       return { ...state, connectionToServer: action.payload }
+
+    case CHANNEL_SELECTED:
+      return { ...state, selectedChannel: action.payload }
 
     default:
       return state

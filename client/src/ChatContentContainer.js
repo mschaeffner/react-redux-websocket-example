@@ -1,12 +1,19 @@
 import { connect } from 'react-redux'
 import ChatContent from './ChatContent'
-import { receiveMessage } from './actions'
 
 
 const mapStateToProps = state => {
-  return {
-    messages: state.messages
+  
+  if(state.selectedChannel === 'ALL') {
+    return {
+      messages: state.messages
+    }
+  } else {
+    return {
+      messages: state.activeUsers.find(u => u.id === state.selectedChannel).messages
+    }
   }
+  
 }
 
 export default connect(mapStateToProps)(ChatContent)

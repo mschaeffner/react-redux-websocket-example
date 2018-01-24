@@ -13,9 +13,9 @@ function broadcast(data) {
   })
 }
 
-function privateMessage(username, data) {
+function privateMessage(receiver, data) {
   activeUsers.forEach(function(user) {
-    if (user.username === username && user.connection.readyState === WebSocket.OPEN) {
+    if (user.id === receiver && user.connection.readyState === WebSocket.OPEN) {
       user.connection.send(data)
     }
   })
@@ -26,6 +26,8 @@ wss.on('connection', function(ws) {
   ws.on('message', function(data) {
 
     const message = JSON.parse(data)
+    console.log(message)
+
     if (message.type === "USER_JOINED") {
       activeUsers.push({
         id: message.payload.id,
@@ -46,8 +48,8 @@ wss.on('connection', function(ws) {
       ws.send(JSON.stringify(activeUsersMessage))
     }
 
-    if (message.type === "PRIVATE_MESSAGE") {
-      privateMessage(message.receiver, data)
+    if (message.type === "CHAT_MESSAGE" && message.payload.receiver !== "ALL") {
+      privateMessage(message.payload.receiver, data)
     } else {
       broadcast(data)
     }
@@ -58,7 +60,7 @@ wss.on('connection', function(ws) {
 
     var leftUser = null
     activeUsers = activeUsers.filter(function(user) {
-      if(user.connection == ws) {
+      if(user.connection === ws) {
         leftUser = user
         return false
       } else {

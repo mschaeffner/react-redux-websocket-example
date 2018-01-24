@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import ChannelList from './ChannelList'
+import { selectChannel } from './actions'
 
 
 const mapStateToProps = state => {
@@ -10,6 +11,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    selectChannel: (channelId) => dispatch(selectChannel(channelId))
   }
 }
 
