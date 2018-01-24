@@ -4,14 +4,31 @@ import styled from 'styled-components'
 
 const List = styled.div`
   padding: 10px;
+  div {
+    padding: 5px;
+  }
+  .highlight {
+    background-color: white;
+    color: black;
+  }
 `;
 
-export default ({users, selectChannel}) =>
-  <List>
-    <div onClick={()=>selectChannel('ALL')}>ALL</div>
-    {users.map((user, index) =>
-      <div key={index} onClick={()=>selectChannel(user.id)}>
-        {user.username}
-      </div>
-    )}
-  </List>
+export default ({myId, users, selectedChannel, selectChannel}) => {
+  
+  const allItem = {
+    id: 'ALL',
+    username: 'ALL'
+  }
+  const list = [ allItem, ...users]
+  
+  return (
+    <List>
+      {list.map((user, index) =>
+        <div className={selectedChannel === user.id ? 'highlight': ''} key={index} onClick={()=>selectChannel(user.id)}>
+          {user.username}
+          {myId === user.id ? ' (you)': ''}
+        </div>
+      )}
+    </List>
+  )  
+}

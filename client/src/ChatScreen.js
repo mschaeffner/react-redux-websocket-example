@@ -21,7 +21,7 @@ const ContentLayout = styled.div`
 const Sidebar = styled.div`
   background-color: #333;
   color: white;
-  width: 200px;
+  width: 300px;
 `;
 
 const Content = styled.div`

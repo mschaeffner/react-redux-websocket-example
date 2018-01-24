@@ -5,7 +5,9 @@ import { selectChannel } from './actions'
 
 const mapStateToProps = state => {
   return {
-    users: state.activeUsers
+    users: state.activeUsers,
+    selectedChannel: state.selectedChannel,
+    myId: state.me.id
   }
 }
 

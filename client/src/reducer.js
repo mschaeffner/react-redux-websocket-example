@@ -52,7 +52,15 @@ export default (state = INITIAL_STATE, action) => {
       const activeUsers2 = state.activeUsers.filter(u => {
         return u.id !== action.payload.id
       })
-      return { ...state, activeUsers: activeUsers2 }
+      let selectedChannel = state.selectedChannel
+      if(selectedChannel === action.payload.id) {
+        selectedChannel = 'ALL'
+      } 
+      return {
+        ...state,
+        activeUsers: activeUsers2,
+        selectedChannel
+      }
 
     case CHAT_MESSAGE:
       const newMessage = action.payload
