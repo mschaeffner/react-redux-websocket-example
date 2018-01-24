@@ -13,7 +13,7 @@ const List = styled.div`
   }
 `;
 
-export default ({myId, users, selectedChannel, selectChannel}) => {
+export default ({myId, users, selectedChannel, selectUser}) => {
   
   const allItem = {
     id: 'ALL',
@@ -24,7 +24,11 @@ export default ({myId, users, selectedChannel, selectChannel}) => {
   return (
     <List>
       {list.map((user, index) =>
-        <div className={selectedChannel === user.id ? 'highlight': ''} key={index} onClick={()=>selectChannel(user.id)}>
+        <div
+          className={selectedChannel === user.id ? 'highlight': ''}
+          key={index}
+          onClick={() => selectUser(user.id)}
+        >
           {user.username}
           {myId === user.id ? ' (you)': ''}
         </div>

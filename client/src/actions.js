@@ -2,22 +2,20 @@ export const NEW_MESSAGE_CHANGED = 'NEW_MESSAGE_CHANGED'
 export const MESSAGE_SENT = 'MESSAGE_SENT'
 export const USERNAME_CHANGED = 'USERNAME_CHANGED'
 export const CONNECTED_TO_SERVER = 'CONNECTED_TO_SERVER'
-export const CHANNEL_SELECTED = 'CHANNEL_SELECTED'
+export const USER_SELECTED = 'USER_SELECTED'
 
 export const USER_JOINED = 'USER_JOINED'
 export const USER_LEFT = 'USER_LEFT'
 export const CHAT_MESSAGE = 'CHAT_MESSAGE'
 export const ACTIVE_USERS = 'ACTIVE_USERS'
 
-
 const SERVER_URL = 'ws://localhost:8080'
 
 
-
-export const selectChannel = (channelId) => dispatch => {
+export const selectUser = (id) => dispatch => {
   dispatch({
-    type: CHANNEL_SELECTED,
-    payload: channelId
+    type: USER_SELECTED,
+    payload: id
   })
 }
 
@@ -86,6 +84,3 @@ export const connectToServer = () => (dispatch, getState) => {
   }
 
 }
-
-
-

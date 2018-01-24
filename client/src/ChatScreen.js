@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import ChannelListContainer from './ChannelListContainer'
+import UserListContainer from './UserListContainer'
 import MessageInputContainer from './MessageInputContainer'
 import ChatContentContainer from './ChatContentContainer'
 
@@ -40,7 +40,7 @@ export default () =>
   <MainLayout>
 
     <Sidebar>
-      <ChannelListContainer />
+      <UserListContainer />
     </Sidebar>
 
     <ContentLayout>

@@ -9,7 +9,7 @@ import {
   USER_JOINED,
   CHAT_MESSAGE,
   ACTIVE_USERS,
-  CHANNEL_SELECTED
+  USER_SELECTED
 } from './actions'
 
 
@@ -26,59 +26,9 @@ const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
+  let activeUsers
+  
   switch (action.type) {
-
-    case NEW_MESSAGE_CHANGED:
-      return { ...state, newMessageText: action.payload }
-
-    case MESSAGE_SENT:
-      return { ...state, newMessageText: ''}
-
-    case ACTIVE_USERS:
-      const activeUsers = action.payload.users.map(u => {
-        u.messages = []
-        return u
-      })
-      return { ...state, activeUsers: action.payload.users }
-
-    case USER_JOINED:
-      const activeUsers1 = [ ...state.activeUsers ]
-      if(!activeUsers1.filter(u => u.id === action.payload.id).length) {
-        activeUsers1.push({ ...action.payload, messages: [] })
-      }
-      return { ...state, activeUsers: activeUsers1 }
-
-    case USER_LEFT:
-      const activeUsers2 = state.activeUsers.filter(u => {
-        return u.id !== action.payload.id
-      })
-      let selectedChannel = state.selectedChannel
-      if(selectedChannel === action.payload.id) {
-        selectedChannel = 'ALL'
-      } 
-      return {
-        ...state,
-        activeUsers: activeUsers2,
-        selectedChannel
-      }
-
-    case CHAT_MESSAGE:
-      const newMessage = action.payload
-      
-      if(newMessage.receiver === 'ALL') {
-        const messages1 = [ ...state.messages, newMessage ]
-        return { ...state, messages: messages1 }
-      } else if(newMessage.receiver === state.me.id) {
-        const activeUsers3 = [ ...state.activeUsers ]
-        const aaa = activeUsers3.find(u => u.id === newMessage.sender.id)
-        aaa.messages = [ ...aaa.messages, newMessage ]
-        return { ...state, activeUsers: activeUsers3 }
-      } else {
-        const activeUsers4 = [ ...state.activeUsers ]
-        const bbb = activeUsers4.find(u => u.id === newMessage.receiver)
-        bbb.messages = [ ...bbb.messages, newMessage ]
-        return { ...state, activeUsers: activeUsers4 }
-      }
 
     case USERNAME_CHANGED:
       const me = { ...state.me, username: action.payload } 
@@ -87,8 +37,56 @@ export default (state = INITIAL_STATE, action) => {
     case CONNECTED_TO_SERVER:
       return { ...state, connectionToServer: action.payload }
 
-    case CHANNEL_SELECTED:
+    case USER_SELECTED:
       return { ...state, selectedChannel: action.payload }
+
+    case NEW_MESSAGE_CHANGED:
+      return { ...state, newMessageText: action.payload }
+
+    case MESSAGE_SENT:
+      return { ...state, newMessageText: ''}
+
+    case ACTIVE_USERS:
+      activeUsers = action.payload.users.map(u => {
+        u.messages = []
+        return u
+      })
+      return { ...state, activeUsers }
+
+    case USER_JOINED:
+      activeUsers = [ ...state.activeUsers ]
+      if(!activeUsers.filter(u => u.id === action.payload.id).length) {
+        activeUsers.push({ ...action.payload, messages: [] })
+      }
+      return { ...state, activeUsers }
+
+    case USER_LEFT:
+      activeUsers = state.activeUsers.filter(u => {
+        return u.id !== action.payload.id
+      })
+      let selectedChannel = state.selectedChannel
+      if(selectedChannel === action.payload.id) {
+        selectedChannel = 'ALL'
+      } 
+      return { ...state, activeUsers, selectedChannel }
+
+    case CHAT_MESSAGE:
+      const newMessage = action.payload
+      
+      if(newMessage.receiver === 'ALL') {
+        const messages1 = [ ...state.messages, newMessage ]
+        return { ...state, messages: messages1 }
+      } else if(newMessage.receiver === state.me.id) {
+        activeUsers = [ ...state.activeUsers ]
+        const sender = activeUsers.find(u => u.id === newMessage.sender.id)
+        sender.messages = [ ...sender.messages, newMessage ]
+        return { ...state, activeUsers }
+      } else {
+        activeUsers = [ ...state.activeUsers ]
+        const receiver = activeUsers.find(u => u.id === newMessage.receiver)
+        receiver.messages = [ ...receiver.messages, newMessage ]
+        return { ...state, activeUsers }
+      }
 
     default:
       return state

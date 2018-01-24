@@ -3,15 +3,13 @@ import ChatContent from './ChatContent'
 
 
 const mapStateToProps = state => {
+
+  const messages = (state.selectedChannel === 'ALL')
+    ? state.messages
+    : state.activeUsers.find(u => u.id === state.selectedChannel).messages
   
-  if(state.selectedChannel === 'ALL') {
-    return {
-      messages: state.messages
-    }
-  } else {
-    return {
-      messages: state.activeUsers.find(u => u.id === state.selectedChannel).messages
-    }
+  return {
+    messages
   }
   
 }
