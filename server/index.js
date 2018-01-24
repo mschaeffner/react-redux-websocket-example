@@ -50,6 +50,9 @@ wss.on('connection', function(ws) {
 
     if (message.type === "CHAT_MESSAGE" && message.payload.receiver !== "ALL") {
       privateMessage(message.payload.receiver, data)
+      if(message.payload.receiver !== message.payload.sender.id) {
+        privateMessage(message.payload.sender.id, data)
+      }
     } else {
       broadcast(data)
     }

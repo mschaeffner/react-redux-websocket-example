@@ -60,10 +60,16 @@ export default (state = INITIAL_STATE, action) => {
       if(newMessage.receiver === 'ALL') {
         const messages1 = [ ...state.messages, newMessage ]
         return { ...state, messages: messages1 }
-      } else {
-        const activeUsers3 = state.activeUsers
-        activeUsers3.find(u => u.id === newMessage.sender.id).messages.push(newMessage)
+      } else if(newMessage.receiver === state.me.id) {
+        const activeUsers3 = [ ...state.activeUsers ]
+        const aaa = activeUsers3.find(u => u.id === newMessage.sender.id)
+        aaa.messages = [ ...aaa.messages, newMessage ]
         return { ...state, activeUsers: activeUsers3 }
+      } else {
+        const activeUsers4 = [ ...state.activeUsers ]
+        const bbb = activeUsers4.find(u => u.id === newMessage.receiver)
+        bbb.messages = [ ...bbb.messages, newMessage ]
+        return { ...state, activeUsers: activeUsers4 }
       }
 
     case USERNAME_CHANGED:
